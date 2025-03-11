@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // Registration function
     public function register(Request $request)
     {
         // Validate the register request
@@ -38,7 +37,6 @@ class AuthController extends Controller
         return response()->json(['token' => $token]);
     }
 
-    // Login function
     public function login(Request $request)
     {
         // Validate the login request
@@ -59,4 +57,10 @@ class AuthController extends Controller
 
         return response()->json(['token' => $token]);
     }
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json(['message' => 'Logged out successfully']);
+    }
+    
 }
